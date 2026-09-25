@@ -10,7 +10,7 @@ function emit(label, value) { __lines.push([String(label).replace(/ =$/, ""), va
 
 const spec = JSON.parse(fs.readFileSync(process.argv[2] || "sample/aligned.json", "utf8"));
 const aligned = advance([spec.left || [], spec.right || []], spec.step);
-const joined = joinStreams(spec.left || [], spec.right || [], aligned.watermark);
+const joined = joinStreams(spec.left || [], spec.right || [], aligned.watermark, spec.gap_limit, spec.step);
 const view = render(spec);
 
 emit("水位 =", aligned.watermark);
